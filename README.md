@@ -31,3 +31,5 @@ This tool replaces manual trial design with an automated script:
    ```bash
    git clone [https://github.com/YOUR-USERNAME/speech-experiment-automation.git](https://github.com/YOUR-USERNAME/speech-experiment-automation.git)
    cd speech-experiment-automation
+   pip install -r requirements.txt
+   python generate_experiment_sheets.py
