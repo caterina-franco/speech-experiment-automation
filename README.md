@@ -1,35 +1,45 @@
-# Speech Experiment Automation & Operational Sheet Generator
+# Experimental Data Automation & Statistical Evaluation Pipeline
 
-An automated Python pipeline built to handle trial randomization, multi-factor experimental balancing, and styled Excel sheet generation for psychoacoustic speech testing sessions.
+An end-to-end Python pipeline built for experimental acoustic research: from automated trial balancing and operational test-sheet generation, to automated multi-participant data aggregation and statistical performance modeling.
 
-## 📌 Context & The Operational Problem
-Conducting controlled acoustic and perception experiments across multiple participants requires rigorous procedural consistency:
-- **Combinatorial Balancing:** Randomizing real vs. virtual stimuli, topics, and speaker positions without introducing human bias.
-- **Manual Overhead:** Structuring multi-tab spreadsheets manually for test conductors is slow, error-prone, and visually inconsistent.
-- **Trial Integrity:** Ensuring identical split-half breaks and structured response tracking forms for session conductors.
+---
 
-## ⚙️ Solution Architecture
-This tool replaces manual trial design with an automated script:
+## 📌 The Operational Problem
+Manual workflows in multi-subject experiments introduce two primary bottlenecks:
+1. **Upstream manual overhead:** Generating randomized, balanced testing sheets manually across participants is slow, prone to human error, and creates formatting inconsistencies.
+2. **Downstream analytical friction:** Aggregating trial data across dozens of spreadsheets, merging demographic metadata, and producing statistical performance reports by hand is repetitive and error-prone.
 
-1. **Combinatorial Experiment Logic (`crea_esperimento`):**
-   - Extracts balanced subsets of topics from category databases (`DB_VIRTUALI`, `DB_REALI`).
-   - Balances physical speaker outputs (positions 1–4) uniformly across real and virtual sound modes.
-   - Shuffles visual participant placements dynamically while ensuring exact target speaker alignment.
-2. **Operational Spreadsheet Automation (`openpyxl` & `pandas`):**
-   - Automatically generates multi-sheet workbooks partitioned by participant ID.
-   - Embeds standardized answer matrices (Yes/No validation, confidence ratings, and conductor notes).
-   - Applies automated styling: dynamic row heights, header fills, soft-colored highlighting for virtual trials, and distinct border demarcation marking trial milestones (e.g., halfway break at trial 16).
+---
+
+## ⚙️ Pipeline Architecture
+
+### 1. Operational Sheet Generator (`generate_experiment_sheets.py`)
+- **Combinatorial Balancing:** Randomizes stimuli, topics, and speaker positions (1–4) without constraint violations or human bias.
+- **Automated Spreadsheet Styling:** Leverages `openpyxl` to build participant-specific Excel tabs with custom palettes, row heights, and distinct midpoint break borders.
+
+### 2. Data Processing & Statistical Evaluation (`data_analysis_pipeline.py`)
+- **Multi-Source Data Ingestion:** Automates reading and concatenation across 20 participant sheets, merging demographic metadata tables.
+- **Classification Performance Metrics:** Computes Accuracy, Precision, Recall, and Macro F1-scores globally and segmented across demographic cohorts.
+- **Statistical Curves & Visual Reporting:**
+  - Normalized and absolute confusion matrices.
+  - Global and parametric ROC-AUC and Precision-Recall (PRC) curves.
+  - Inter-subject variability analysis via box plots.
+- **Automated Export:** Outputs formatted evaluation reports and PDF figures directly into structured directories.
+
+---
 
 ## 🛠️ Tech Stack
-- **Python 3**
-- **Pandas:** Data modeling and tabular structuring.
-- **OpenPyXL:** Advanced spreadsheet formatting (fills, borders, column widths, font scaling).
+- **Language:** Python 3
+- **Data Manipulation:** `pandas`, `numpy`
+- **Statistical Modeling & Metrics:** `scikit-learn`
+- **Visualization & Reporting:** `matplotlib`, `seaborn`, `openpyxl`
 
-## 🚀 How to Run
+---
 
-1. Clone this repository:
+## 🚀 Execution Overview
+
+1. Install dependencies:
    ```bash
-   git clone [https://github.com/YOUR-USERNAME/speech-experiment-automation.git](https://github.com/YOUR-USERNAME/speech-experiment-automation.git)
-   cd speech-experiment-automation
    pip install -r requirements.txt
    python generate_experiment_sheets.py
+   python data_analysis.py
