@@ -37,5 +37,5 @@ Manual workflows in multi-subject experiments introduce two primary bottlenecks:
 1. Install dependencies:
    ```bash
    pip install -r requirements.txt
-   python generate_experiment_sheets.py
-   python data_analysis.py
+   python3 generate_experiment_sheets.py
+   python3 data_analysis.py
