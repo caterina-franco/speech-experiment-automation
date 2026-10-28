@@ -1,30 +1,26 @@
-# Experimental Data Automation & Statistical Evaluation Pipeline
+# Experimental Data Automation & Analysis Pipeline
 
-An end-to-end Python pipeline built for experimental acoustic research: from automated trial balancing and operational test-sheet generation, to automated multi-participant data aggregation and statistical performance modeling.
+A Python pipeline built to automate experimental research: from creating balanced test sheets to aggregating participant data and generating statistical performance reports.
 
 ---
 
-## 📌 The Operational Problem
+## 📌 The Problem
 Manual workflows in multi-subject experiments introduce two primary bottlenecks:
-1. **Upstream manual overhead:** Generating randomized, balanced testing sheets manually across participants is slow, prone to human error, and creates formatting inconsistencies.
-2. **Downstream analytical friction:** Aggregating trial data across dozens of spreadsheets, merging demographic metadata, and producing statistical performance reports by hand is repetitive and error-prone.
+1. **Time-consuming setup:** Manually generating randomized and balanced test sheets for each participant is slow and prone to human errors.
+2. **Repetitive data collection:** Merging results from dozens of separate spreadsheets and calculating metrics by hand is tedious and inefficient.
 
 ---
 
 ## ⚙️ Pipeline Architecture
 
-### 1. Operational Sheet Generator (`generate_experiment_sheets.py`)
-- **Combinatorial Balancing:** Randomizes stimuli, topics, and speaker positions (1–4) without constraint violations or human bias.
-- **Automated Spreadsheet Styling:** Leverages `openpyxl` to build participant-specific Excel tabs with custom palettes, row heights, and distinct midpoint break borders.
+### 1. Test Sheet Generator (`generate_experiment_sheets.py`)
+- **Automated Balancing:** Randomizes stimuli, topics, and speaker positions without human bias.
+- **Excel Formatting:** Uses `openpyxl` to automatically build clean, structured Excel sheets for testing.
 
-### 2. Data Processing & Statistical Evaluation (`data_analysis_pipeline.py`)
-- **Multi-Source Data Ingestion:** Automates reading and concatenation across 20 participant sheets, merging demographic metadata tables.
-- **Classification Performance Metrics:** Computes Accuracy, Precision, Recall, and Macro F1-scores globally and segmented across demographic cohorts.
-- **Statistical Curves & Visual Reporting:**
-  - Normalized and absolute confusion matrices.
-  - Global and parametric ROC-AUC and Precision-Recall (PRC) curves.
-  - Inter-subject variability analysis via box plots.
-- **Automated Export:** Outputs formatted evaluation reports and PDF figures directly into structured directories.
+### 2. Data Processing & Metrics (`data_analysis_pipeline.py`)
+- **Data Ingestion:** Automatically reads and merges data from 20 participant spreadsheets along with demographic metadata.
+- **Performance Evaluation:** Calculates Accuracy, Precision, Recall, and F1-scores across global and specific subgroups.
+- **Automated Visualization:** Generates confusion matrices, ROC-AUC curves, and box plots, exporting reports directly to PDF and structured folders.
 
 ---
 
