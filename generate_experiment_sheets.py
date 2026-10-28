@@ -60,7 +60,7 @@ def crea_esperimento():
 
 # --- 2. GENERAZIONE EXCEL ---
 NUM_PARTECIPANTI = 6
-NOME_FILE = "NOME.xlsx"
+NOME_FILE = "experiment_sheets.xlsx"
 COLORE_VIOLA = "7644A6"
 STILE_VIOLA = PatternFill("solid", start_color=COLORE_VIOLA)
 STILE_VIRTUAL = PatternFill("solid", start_color="F2EBF5")
@@ -68,7 +68,7 @@ BORDI = Border(left=Side(style='thin'), right=Side(style='thin'), top=Side(style
 CENTRATO = Alignment(horizontal='center', vertical='center', wrap_text=True)
 
 with pd.ExcelWriter(NOME_FILE, engine='openpyxl') as writer:
-    for n in range(16, 16 + NUM_PARTECIPANTI):
+    for n in range(1, 1+ NUM_PARTECIPANTI):
         id_str = f"{n:02d}"
         nome_foglio = f"Partecipante {id_str}"
         dati_trial = crea_esperimento()
